@@ -4,10 +4,6 @@ import axios from 'axios';
 const SONG_URL = `/api/songs`
 
 class Form extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   state = {
     year: "",
     songs: []
@@ -20,7 +16,6 @@ class Form extends Component {
   submit = () => {
     axios.get(`${SONG_URL}/${this.state.year}`).
       then((resp) => {
-        console.log(resp.data.songs);
         this.setState({songs: resp.data.songs});
       })
   }

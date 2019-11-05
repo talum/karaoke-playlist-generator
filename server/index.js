@@ -14,9 +14,10 @@ app.get('/api/greeting', (req, res) => {
 app.get('/api/songs/:year', (req, res) => {
   const { year } = req.params
 
-  BillboardClient.getSongs(year).then((response) => {
+  BillboardClient.getSongsAroundYear(year).then((response) => {
+    const songs = response.reduce((acc, val) => acc.concat(val.slice(0, 10)), []);
     res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify({ songs: response}));
+    res.send(JSON.stringify({ songs: songs}));
   });
 });
 
