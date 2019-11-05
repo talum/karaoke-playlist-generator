@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const BillboardClient = require('./BillboardClient.js');
+const SongGenerator = require('./SongGenerator.js');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -14,10 +14,9 @@ app.get('/api/greeting', (req, res) => {
 app.get('/api/songs/:year', (req, res) => {
   const { year } = req.params
 
-  BillboardClient.getSongsAroundYear(year).then((response) => {
-    const songs = response.reduce((acc, val) => acc.concat(val.slice(0, 10)), []);
+  SongGenerator.call(year).then((response) => {
     res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify({ songs: songs}));
+    res.send(JSON.stringify({ songs: response}));
   });
 });
 
