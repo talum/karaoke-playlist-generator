@@ -11,8 +11,10 @@ app.get('/api/greeting', (req, res) => {
   res.send(JSON.stringify({ greeting: `Hello ${name}!` }));
 });
 
-app.get('/api/songs', (req, res) => {
-  BillboardClient.getSongs().then((response) => {
+app.get('/api/songs/:year', (req, res) => {
+  const { year } = req.params
+
+  BillboardClient.getSongs(year).then((response) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify({ songs: response}));
   });

@@ -9,7 +9,8 @@ class Form extends Component {
   }
 
   state = {
-    year: ""
+    year: "",
+    songs: []
   }
 
   handleChange = (e) => {
@@ -17,11 +18,11 @@ class Form extends Component {
   }
 
   submit = () => {
-    axios.get(SONG_URL).
+    axios.get(`${SONG_URL}/${this.state.year}`).
       then((resp) => {
         console.log(resp.data.songs);
+        this.setState({songs: resp.data.songs});
       })
-    // do some stuff
   }
 
   render() {
@@ -30,6 +31,9 @@ class Form extends Component {
         <label>Enter your graduation year</label>
         <input type="text" onChange={this.handleChange} value={this.state.year} />
         <input type="submit" onClick={this.submit} onSubmit={this.submit} />
+        <ul>
+          { this.state.songs.map((song, i) => <li key={i}>{song.title} by {song.artist}</li>) }
+        </ul>
       </Fragment>
     )
   }
