@@ -1,4 +1,7 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component, Fragment } from 'react';
+import axios from 'axios';
+
+const SONG_URL = `/api/songs`
 
 class Form extends Component {
   constructor(props) {
@@ -14,6 +17,10 @@ class Form extends Component {
   }
 
   submit = () => {
+    axios.get(SONG_URL).
+      then((resp) => {
+        console.log(resp.data.songs);
+      })
     // do some stuff
   }
 
@@ -22,7 +29,7 @@ class Form extends Component {
       <Fragment>
         <label>Enter your graduation year</label>
         <input type="text" onChange={this.handleChange} value={this.state.year} />
-        <input type="submit" onSubmit={this.submit} />
+        <input type="submit" onClick={this.submit} onSubmit={this.submit} />
       </Fragment>
     )
   }
