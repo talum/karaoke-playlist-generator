@@ -14,10 +14,14 @@ app.get('/api/greeting', (req, res) => {
 app.get('/api/songs/:year', (req, res) => {
   const { year } = req.params
 
-  SongGenerator.call(year).then((response) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify({ songs: response}));
-  });
+  SongGenerator.call(year)
+    .then((response) => {
+      res.setHeader('Content-Type', 'application/json');
+      res.send(JSON.stringify({ songs: response}));
+    })
+    .catch((err) => {
+      res.status(422).send('try again');
+    });
 });
 
 app.listen(3001, () => {
