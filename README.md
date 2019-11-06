@@ -1,3 +1,15 @@
+# Karaoke Playlist Generator
+
+Takes in a graduation year and generates a playlist for karaoke from the top
+Billboard hits from that year and surrounding years. Also adds in some
+curated fan favorites.
+
+## Development
+
+Start up the node server and webpack with `yarn run dev`.
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
